@@ -57,6 +57,11 @@ images, and full-screen wipe transitions between sections.
 - **3D portrait** — the photo is placed in a perspective container with a
   blurred "ghost" layer behind it, a soft floor shadow, and a subtle tilt that
   follows the mouse (or device orientation on mobile).
+- **Fast first paint** — both scripts are `defer`red, Font Awesome is fetched
+  with `media="print"` so it never blocks rendering (with a `<noscript>` copy),
+  and the portrait is served as a 96 KB WebP first with the PNG as the
+  `<picture>` fallback, marked `fetchpriority="high"` and given its dimensions so
+  it cannot cause layout shift.
 - **Fitting name** — the hero name is measured with JavaScript on load and on
   resize so it always fits the viewport width.
 
@@ -66,7 +71,8 @@ images, and full-screen wipe transitions between sections.
 - `styles.css` — all styling
 - `script.js` — all behaviour and the line illustrations
 - `i18n.js` — every string on the page, in English and French
-- `profile-3d.png` — the portrait, **with a transparent background**
+- `profile-3d.png` — the portrait, **with a transparent background** (781×1000)
+- `profile-3d.webp` — the same portrait as WebP, served first via `<picture>`
 - `newprofileimage.png` — source artwork for the current portrait
 - `amani cindege michel profile picture.JPG` — original photo, kept for reference
 - `.gitignore`

@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 <link rel="stylesheet" href="styles.css">
 <script>
 /* Apply the saved theme before first paint to avoid a flash of the wrong mode */
@@ -76,7 +77,10 @@
     <div class="floor"></div>
     <div class="portrait" id="portrait">
       <img class="ghost" src="profile-3d.png" alt="" aria-hidden="true">
-      <img id="photo" src="profile-3d.png" alt="AMANI CINDEGE Michel">
+      <picture>
+        <source srcset="profile-3d.webp" type="image/webp">
+        <img id="photo" src="profile-3d.png" alt="AMANI CINDEGE Michel" width="781" height="1000" fetchpriority="high">
+      </picture>
       <div class="placeholder" aria-hidden="true">
         <svg viewBox="0 0 400 460" preserveAspectRatio="xMidYMax meet">
           <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9a9a9a"/><stop offset="1" stop-color="#2b2b2b"/></linearGradient></defs>
@@ -104,7 +108,7 @@
 </header>
 
 <!-- ============ ABOUT ============ -->
-<section class="block alt" id="about">
+<section class="block alt" id="about" hidden>
   <div class="wrap">
     <div class="head"><div><h2 data-i18n="about.title">About me</h2><p data-i18n="about.sub">Kigali, Rwanda and Bukavu, DRC</p></div><div class="ill" data-ill="about"></div></div>
     <div class="about-grid">
@@ -124,7 +128,7 @@
 </section>
 
 <!-- ============ PROJECTS ============ -->
-<section class="block" id="projects">
+<section class="block" id="projects" hidden>
   <div class="wrap">
     <div class="head"><div><h2 data-i18n="projects.title">Selected work</h2><p data-i18n="projects.sub">7 projects, from marketplaces to stock management</p></div><div class="ill" data-ill="projects"></div></div>
 
@@ -219,7 +223,7 @@
 </section>
 
 <!-- ============ SKILLS ============ -->
-<section class="block alt" id="skills">
+<section class="block alt" id="skills" hidden>
   <div class="wrap">
     <div class="head"><div><h2 data-i18n="skills.title">Skills</h2><p data-i18n="skills.sub">Languages, frameworks and platforms I work with</p></div><div class="ill" data-ill="skills"></div></div>
     <div class="skills-grid">
@@ -238,7 +242,7 @@
 </section>
 
 <!-- ============ EDUCATION ============ -->
-<section class="block" id="education">
+<section class="block" id="education" hidden>
   <div class="wrap">
     <div class="head"><div><h2 data-i18n="education.title">Education</h2><p data-i18n="education.sub">Degree and certifications</p></div><div class="ill" data-ill="education"></div></div>
     <div class="t-item"><div class="t-date">2021 – 2025</div><div>
@@ -254,7 +258,7 @@
 </section>
 
 <!-- ============ CONTACT ============ -->
-<section class="block alt" id="contact">
+<section class="block alt" id="contact" hidden>
   <div class="wrap">
     <div class="head"><div><h2 data-i18n="contact.title">Contact</h2><p data-i18n="contact.sub">Open to jobs and freelance projects</p></div><div class="ill" data-ill="contact"></div></div>
     <p class="contact-big"><a href="mailto:michelamani151@gmail.com" data-i18n="contact.big">Let's build something together</a></p>
@@ -286,7 +290,7 @@
 </div>
 <div class="sr-only" id="announce" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></div>
 
-<script src="i18n.js"></script>
-<script src="script.js"></script>
+<script src="i18n.js" defer></script>
+<script src="script.js" defer></script>
 </body>
 </html>

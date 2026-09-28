@@ -20,8 +20,13 @@ function prepIll(el, key){
 }
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* Strings owned by this file (transition scenes, theme button) live in i18n.js */
-const t = (key, fallback) => (window.i18n ? window.i18n.t(key, fallback) : (fallback || key));
+/* Strings owned by this file (transition scenes, theme button) live in i18n.js.
+   Read that dictionary directly, and stay safe if i18n.js never loads. */
+const t = (key, fallback) => {
+  const table = (typeof I18N !== 'undefined') ? (I18N[currentLang] || I18N.en) : null;
+  if(table && typeof table[key] === 'string') return table[key];
+  return typeof fallback === 'string' ? fallback : key;
+};
 
 /* Draw illustrations in the page when they scroll into view */
 const drawObs = new IntersectionObserver(entries=>{
@@ -186,3 +191,9 @@ paintTheme();
 
 /* The theme button wording changes with the language, so re-paint it on a switch */
 document.addEventListener('langchange', ()=>paintTheme());
+
+/* ---------- Language switch ----------
+   Deliberately the LAST thing in this file: the illustrations, the one-section
+   view and the transitions are already set up, so a problem in here can only
+   affect the switcher itself. */
+if(window.i18n) window.i18n.initLang();

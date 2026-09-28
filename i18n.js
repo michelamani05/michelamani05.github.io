@@ -282,8 +282,13 @@ const I18N = {
 const LANGS = ['en', 'fr'];
 let currentLang = 'en';
 
-/* t() is the one lookup used here and in script.js */
-function t(key, fallback){
+/* translate() is the one lookup here; script.js reads the dictionary directly and
+   also gets it as window.i18n.t.
+   It must NOT be called t(): a global function declaration creates a
+   non-configurable window property, which turned script.js's own `const t` into
+   "SyntaxError: Identifier 't' has already been declared" — that killed the whole
+   file, so the sections, transitions and illustrations all stopped working. */
+function translate(key, fallback){
   const table = I18N[currentLang] || I18N.en;
   if(table && typeof table[key] === 'string') return table[key];
   if(typeof fallback === 'string') return fallback;
@@ -336,17 +341,21 @@ function setLang(next){
   applyLang(next);
 }
 
-document.querySelectorAll('.lang-btn').forEach(b=>{
-  b.addEventListener('click', ()=> setLang(b.dataset.lang));
-});
-
-/* Starting language: the head script already resolved it from ?lang=, localStorage, the browser */
-let start = 'en';
-try{
-  start = document.documentElement.getAttribute('data-lang') || localStorage.getItem('lang') || 'en';
-}catch(e){}
-applyLang(LANGS.indexOf(start) < 0 ? 'en' : start);
+/* Wiring and the first apply live in initLang(); script.js calls it as its last
+   statement, so nothing in this file can block the illustrations, the views or
+   the transitions if it ever fails. */
+function initLang(){
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.addEventListener('click', ()=> setLang(b.dataset.lang));
+  });
+  /* The head script already resolved this from ?lang=, localStorage and the browser */
+  let start = 'en';
+  try{
+    start = document.documentElement.getAttribute('data-lang') || localStorage.getItem('lang') || 'en';
+  }catch(e){}
+  applyLang(LANGS.indexOf(start) < 0 ? 'en' : start);
+}
 
 /* Small API so script.js can reuse the same dictionary */
-window.i18n = { t: t, applyLang: applyLang, setLang: setLang, list: LANGS,
+window.i18n = { t: translate, applyLang: applyLang, setLang: setLang, initLang: initLang, list: LANGS,
   get lang(){ return currentLang; } };
