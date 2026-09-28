@@ -1,107 +1,106 @@
 # Professional Portfolio - AMANI CINDEGE Michel
 
-This is a professional portfolio website showcasing the skills and projects of AMANI CINDEGE Michel, a Software Engineering graduate from AUCA (2025).
+A single-page portfolio for AMANI CINDEGE Michel, a Software Engineering
+graduate of the Adventist University of Central Africa (AUCA, 2025).
 
-## Features
+The site is a bold, editorial design: an oversized outlined name behind a
+3D cut-out portrait, black-and-white line illustrations in place of stock
+images, and full-screen wipe transitions between sections.
 
-- Responsive design that works on all devices
-- Modern UI with animations and transitions
-- Sections for About, Skills, Education, Projects, and Contact
-- Profile picture integration
-- Direct contact options via email, social media, and phone
+## Sections
 
-## Free Deployment with GitHub Pages (Fastest & Easiest)
+- **Home** — hero with the outlined name, the 3D portrait, a short pitch and
+  quick links to LinkedIn, GitHub, email and phone.
+- **About** — biography plus key facts (graduation year, certifications,
+  languages, projects shipped).
+- **Selected work** — seven projects, each with a line-illustration thumbnail,
+  a description, feature bullets and technology tags.
+- **Skills** — five categories: frontend, backend, database, cloud &
+  deployment, and network & tools.
+- **Education** — the AUCA degree and the two Cisco certifications.
+- **Contact** — email, LinkedIn, GitHub and both phone numbers, plus a large
+  "Let's build something together" call to action.
 
-GitHub Pages is a free hosting service that allows you to host your portfolio directly from a GitHub repository. Here's how to deploy for free:
+## Design features
 
-### Step 1: Create a GitHub Account
+- **3-second menu transition** — clicking any menu item (or an in-page link)
+  plays a full-screen overlay: two clip-path layers wipe in, a line
+  illustration draws itself, the section title fades in, and a progress bar
+  fills. The page scrolls to the target underneath the overlay, which then
+  wipes away. Implemented in `script.js` with the `SCENES` map and the
+  `#pt` overlay; respect for `prefers-reduced-motion` skips it.
+- **Line illustrations** — all artwork is inline SVG, defined once in the
+  `ILL` object at the top of `script.js` and injected into any element with a
+  `data-ill` attribute. They animate with a stroke-dash "drawing" effect when
+  scrolled into view.
+- **Responsive layout** — breakpoints at 1180px, 1024px, 760px and 480px, plus
+  a landscape-phone rule. On tablet and phone the inline menu collapses into a
+  ☰ burger button and the hero stacks vertically.
+- **3D portrait** — the photo is placed in a perspective container with a
+  blurred "ghost" layer behind it, a soft floor shadow, and a subtle tilt that
+  follows the mouse (or device orientation on mobile).
+- **Fitting name** — the hero name is measured with JavaScript on load and on
+  resize so it always fits the viewport width.
 
-1. Go to [GitHub.com](https://github.com/) and sign up for a free account
-2. Verify your email address
+## Files
 
-### Step 2: Create a New Repository
+- `index.html` — page structure
+- `styles.css` — all styling
+- `script.js` — all behaviour and the line illustrations
+- `profile-3d.png` — the portrait, **with a transparent background**
+- `amani cindege michel profile picture.JPG` — original photo, kept for reference
+- `.gitignore`
 
-1. Click the "+" icon in the top-right corner and select "New repository"
-2. Name your repository `michelamani05.github.io` (this must match your GitHub username)
-3. Select "Public" (free) option
-4. Check "Add a README file"
-5. Click "Create repository"
+## Replacing profile-3d.png
 
-### Step 3: Upload Your Portfolio Files
+The hero loads `profile-3d.png` and expects a **transparent background**.
+A photo with a white background will look wrong, because the page draws a
+drop shadow and a blurred layer behind the cut-out.
 
-1. In your new repository, click "Add file" > "Upload files"
-2. Drag and drop ALL files from your portfolio folder:
-   - `index.html`
-   - `styles.css`
-   - `script.js`
-   - `amani cindege michel profile picture.JPG`
-   - `.gitignore`
-   - `README.md`
-3. Click "Commit changes" at the bottom
+If `profile-3d.png` is missing or fails to load, the page falls back to a grey
+silhouette placeholder with the text "Add profile-3d.png" — the site never
+breaks, it just loses the portrait.
 
-### Step 4: Enable GitHub Pages
+To replace it:
 
-1. Go to your repository Settings tab
-2. Scroll down to the "Pages" section
-3. Under "Source", select "Deploy from a branch"
-4. Select "main" branch and "/(root)" folder
-5. Click "Save"
+1. Put your new photo in this folder.
+2. Remove the background:
 
-### Step 5: Access Your Live Portfolio
+   ```bash
+   pip install "rembg[cpu]"
+   rembg i "your-photo.jpg" profile-3d.png
+   ```
 
-1. Wait a few minutes for GitHub to build your site
-2. Your portfolio will be available at: `https://michelamani05.github.io`
-3. This is your free public URL where anyone can access your portfolio
+3. Crop the result to head and shoulders, with the bottom edge cut straight
+   across at the shoulders, so the image sits correctly on the "floor" shadow.
+4. Overwrite `profile-3d.png`.
 
-### Optional: Add Custom Domain
+Keep the proportions roughly square and the subject centred — the CSS scales
+the image to the height of the stage.
 
-1. In the Pages settings, scroll down to "Custom domain"
-2. Enter `www.amanicindegemichel.com`
-3. Click "Save"
-4. GitHub will generate a CNAME file for you
-5. At your domain registrar, add a CNAME record pointing `www` to `michelamani05.github.io`
+## Run it locally
 
-## Alternative Free Hosting Options
+```bash
+python -m http.server 8000
+```
 
-### Option 1: Netlify (Also Free)
-
-1. Create an account at [Netlify](https://www.netlify.com/)
-2. Zip the contents of this folder
-3. Drag and drop the zip file to Netlify's dashboard
-4. Your site will be deployed with a default netlify.app URL
-
-### Option 2: Vercel (Also Free)
-
-1. Create an account at [Vercel](https://vercel.com/)
-2. Install Vercel CLI: `npm i -g vercel`
-3. Run `vercel` in this directory
-4. Follow the prompts to deploy
-
-## Custom Domain Setup
-
-To connect your domain (www.amanicindegemichel.com) to your hosted site:
-
-1. Purchase the domain from a registrar (if you haven't already)
-2. In your hosting platform (Netlify, Vercel, etc.), add your custom domain
-3. Update your domain's DNS settings:
-   - For subdomain (www): Add a CNAME record pointing to your hosting provider
-   - For root domain: Add A records pointing to your hosting provider's IP addresses
-4. Wait for DNS propagation (can take up to 48 hours)
-
-## Files Structure
-
-- `index.html` - Main HTML structure
-- `styles.css` - All styling
-- `script.js` - JavaScript functionality
-- `amani cindege michel profile picture.JPG` - Profile image
+Then open <http://127.0.0.1:8000/>.
 
 ## Technologies Used
 
 - HTML5
-- CSS3
-- JavaScript (ES6)
-- Responsive design with CSS Grid and Flexbox
-- Font Awesome for icons
+- CSS3 (custom properties, clip-path, grid, flexbox, `svh` units)
+- JavaScript (ES6, IntersectionObserver, matchMedia)
+- Google Fonts (Archivo) and Font Awesome 6.4.0
+- [rembg](https://github.com/danielgatis/rembg) for the background removal
+
+## Deployment
+
+The site is already published with GitHub Pages from this repository:
+<https://michelamani05.github.io>
+
+To publish an update, push to `main`; GitHub Pages rebuilds automatically.
+You can also drop the folder on Netlify or Vercel.
 
 ## Contact
 

@@ -1,303 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMANI CINDEGE Michel - Software Engineer</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AMANI CINDEGE Michel · Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="#home">ACM</a>
-            </div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#education" class="nav-link">Education</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-            
-            <div class="hamburger" id="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
+<body class="intro">
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1>AMANI CINDEGE Michel</h1>
-                <h2>Software Engineering Graduate</h2>
-                <p>Passionate Software Engineer | Network Operations Specialist | AUCA 2025 Graduate</p>
-                <div class="hero-btns">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Contact Me</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="profile-image">
-                    <img src="amani cindege michel profile picture.JPG" alt="AMANI CINDEGE Michel">
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav" aria-label="Main">
+  <a href="#home" class="status"><span class="dot"></span>Available for new opportunities</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#about">About</a>
+    <a href="#projects">Work<sup>(07)</sup></a>
+    <a href="#skills">Skills<sup>(05)</sup></a>
+    <a href="#education">Education<sup>(03)</sup></a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#contact" class="btn-dark">Let's talk <i class="fas fa-arrow-right"></i></a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><i class="fas fa-bars"></i></button>
+</nav>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I am a recent Software Engineering graduate from the Adventist University of central Africa (AUCA) in Kigali, scheduled to complete my studies in 2025. My passion lies in developing innovative software solutions and solving complex problems through technology.</p>
-                    <p>Besides my software engineering expertise, I hold certifications in Network Operations and Advanced Networking with Cisco technologies. This dual expertise allows me to approach software development with a comprehensive understanding of network infrastructure and system integration.</p>
-                    <p>My technical skills span across modern web technologies, backend development, and database management, with a strong foundation in both frontend and backend development practices.</p>
-                </div>
-                <div class="about-stats">
-                    <div class="stat">
-                        <h3>2025</h3>
-                        <p>Graduation Year</p>
-                    </div>
-                    <div class="stat">
-                        <h3>5+</h3>
-                        <p>Technical Certifications</p>
-                    </div>
-                    <div class="stat">
-                        <h3>10+</h3>
-                        <p>Programming Languages</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ============ HERO ============ -->
+<header class="hero" id="home">
+  <h1 class="name" id="name" aria-label="AMANI CINDEGE Michel">
+    <span class="w1">AMANI</span><span class="w2">CINDEGE</span>
+  </h1>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2>Skills & Technologies</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fab fa-react"></i> Frontend</h3>
-                    <ul>
-                        <li>React.js</li>
-                        <li>TypeScript</li>
-                        <li>JavaScript</li>
-                        <li>HTML5 & CSS3</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Backend</h3>
-                    <ul>
-                        <li>Java</li>
-                        <li>Python</li>
-                        <li>Web API Development</li>
-                        <li>RESTful Services</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-database"></i> Database</h3>
-                    <ul>
-                        <li>PostgreSQL</li>
-                        <li>SQL</li>
-                        <li>Database Design</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-network-wired"></i> Network & Tools</h3>
-                    <ul>
-                        <li>Advanced Linux</li>
-                        <li>Network Operations</li>
-                        <li>Advanced Networking (Cisco)</li>
-                        <li>Postman API Testing</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- 3D PORTRAIT: save your background-removed photo as "profile-3d.png" next to this file -->
+  <div class="stage" id="stage">
+    <div class="floor"></div>
+    <div class="portrait" id="portrait">
+      <img class="ghost" src="profile-3d.png" alt="" aria-hidden="true">
+      <img id="photo" src="profile-3d.png" alt="AMANI CINDEGE Michel">
+      <div class="placeholder" aria-hidden="true">
+        <svg viewBox="0 0 400 460" preserveAspectRatio="xMidYMax meet">
+          <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9a9a9a"/><stop offset="1" stop-color="#2b2b2b"/></linearGradient></defs>
+          <circle cx="200" cy="150" r="95" fill="url(#g)"/>
+          <path d="M20 460 C30 330 110 270 200 270 C290 270 370 330 380 460 Z" fill="url(#g)"/>
+        </svg>
+        <span>Add profile-3d.png</span>
+      </div>
+    </div>
+  </div>
 
-    <!-- Education Section -->
-    <section id="education" class="education">
-        <div class="container">
-            <h2>Education & Certifications</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Bachelor of Science in Software Engineering</h3>
-                        <h4>Adventist University of central Africa (AUCA) - Kigali</h4>
-                        <p class="date">2021 - 2025</p>
-                        <p>Graduating in 2025 with a focus on software development, system architecture, and network integration.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Certificate in Network Operations</h3>
-                        <h4>Cisco Certified</h4>
-                        <p class="date">Completed</p>
-                        <p>Specialized in network infrastructure, protocols, and operational best practices.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Certificate in Advanced Networking</h3>
-                        <h4>Cisco Certified</h4>
-                        <p class="date">Completed</p>
-                        <p>Advanced network design, implementation, and troubleshooting techniques.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="hero-info">
+    <div class="hero-left">
+      <h2>Software Engineer</h2>
+      <p>AUCA 2025 graduate building web and mobile apps for businesses in Rwanda and the DRC, with Cisco-certified networking skills underneath.</p>
+      <a href="#contact" class="btn-dark">Let's collaborate <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="hero-right">
+      <a class="pill" href="https://linkedin.com/in/michel-cindege-a37742275" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i>LinkedIn</a>
+      <a class="pill" href="https://github.com/michelamani05" target="_blank" rel="noopener"><i class="fab fa-github"></i>GitHub</a>
+      <a class="pill" href="mailto:michelamani151@gmail.com"><i class="fas fa-envelope"></i>Email</a>
+      <a class="pill" href="tel:+250791447517"><i class="fas fa-phone"></i>Call</a>
+    </div>
+  </div>
+</header>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2>Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3>Full-Stack Web Application</h3>
-                    <p>A comprehensive web application built with React.js and Java backend with PostgreSQL database.</p>
-                    <div class="project-tags">
-                        <span class="tag">React.js</span>
-                        <span class="tag">TypeScript</span>
-                        <span class="tag">Java</span>
-                        <span class="tag">PostgreSQL</span>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-network-wired"></i>
-                    </div>
-                    <h3>Network Management System</h3>
-                    <p>System for monitoring and managing network infrastructure with automated alerting and reporting features.</p>
-                    <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Linux</span>
-                        <span class="tag">Network</span>
-                        <span class="tag">Automation</span>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3>Database Management Tool</h3>
-                    <p>Tool for managing PostgreSQL databases with a user-friendly interface and advanced query capabilities.</p>
-                    <div class="project-tags">
-                        <span class="tag">PostgreSQL</span>
-                        <span class="tag">Web API</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">SQL</span>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <h3>CSMS - Construction Services Management System</h3>
-                    <p>Management system for GTC (Global des travaux de construction) to streamline construction project management, resource allocation, and client communication.</p>
-                    <div class="project-tags">
-                        <span class="tag">Project Management</span>
-                        <span class="tag">Construction</span>
-                        <span class="tag">Database</span>
-                        <span class="tag">Web Application</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ============ ABOUT ============ -->
+<section class="block alt" id="about">
+  <div class="wrap">
+    <div class="head"><div><h2>About me</h2><p>Kigali, Rwanda and Bukavu, DRC</p></div><div class="ill" data-ill="about"></div></div>
+    <div class="about-grid">
+      <div>
+        <p class="lead">I'm a Software Engineering graduate from the Adventist University of Central Africa (AUCA) in Kigali, class of 2025. I like building software that solves real, complicated problems.</p>
+        <p>Alongside software engineering, I hold certifications in Network Operations and Advanced Networking with Cisco technologies, so I build applications with a solid understanding of the infrastructure and systems they run on.</p>
+        <p>My skills cover modern web technologies, backend development and database management, and I deploy my work on cloud platforms like Neon, Render and Cloudflare.</p>
+      </div>
+      <div>
+        <div class="fact"><strong>2025</strong><span>Graduation year</span></div>
+        <div class="fact"><strong>5+</strong><span>Technical certifications</span></div>
+        <div class="fact"><strong>10+</strong><span>Programming languages</span></div>
+        <div class="fact"><strong>7</strong><span>Projects shipped</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Contact Me</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h3>Email</h3>
-                            <p>michelamani151@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        <div>
-                            <h3>LinkedIn</h3>
-                            <p>linkedin.com/in/michel-cindege-a37742275</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-github"></i>
-                        <div>
-                            <h3>GitHub</h3>
-                            <p>github.com/michelamani05</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h3>Phone (Airtel DRC)</h3>
-                            <p>+243996748364</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h3>Phone (MTN)</h3>
-                            <p>+250791447517</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-options">
-                    <h3>Or contact me directly:</h3>
-                    <div class="contact-buttons">
-                        <a href="mailto:michelamani151@gmail.com" class="btn btn-primary">
-                            <i class="fas fa-envelope"></i> Email
-                        </a>
-                        <a href="https://linkedin.com/in/michel-cindege-a37742275" target="_blank" class="btn btn-secondary">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
-                        <a href="https://github.com/michelamani05" target="_blank" class="btn btn-secondary">
-                            <i class="fab fa-github"></i> GitHub
-                        </a>
-                        <a href="tel:+243996748364" class="btn btn-secondary">
-                            <i class="fas fa-phone"></i> Call Airtel DRC
-                        </a>
-                        <a href="tel:+250791447517" class="btn btn-secondary">
-                            <i class="fas fa-phone"></i> Call MTN
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ============ PROJECTS ============ -->
+<section class="block" id="projects">
+  <div class="wrap">
+    <div class="head"><div><h2>Selected work</h2><p>7 projects, from marketplaces to stock management</p></div><div class="ill" data-ill="projects"></div></div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 AMANI CINDEGE Michel. All Rights Reserved.</p>
-            <div class="social-links">
-                <a href="https://linkedin.com/in/michel-cindege-a37742275" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/michelamani05" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="mailto:michelamani151@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div>
-        </div>
-    </footer>
+    <article class="project">
+      <div class="thumb"><div class="ill" data-ill="sokoni"></div></div>
+      <div>
+        <p class="kind">Mobile app, Bukavu</p>
+        <h3>SOKONI</h3>
+        <p>A buy-and-sell marketplace app for Bukavu, inspired by Vinted. People sell the clothes, electronics and household items they no longer use, and buy from others nearby at fair prices. Sellers post an item with photos, a price, a category and its condition in a few taps; buyers browse, search, save favourites and message the seller directly to agree on the deal. The mobile-first interface is built to load fast on local networks.</p>
+        <ul class="features">
+          <li>Post items with photos, price and condition</li>
+          <li>Search and filter by category and price</li>
+          <li>Direct messaging between buyer and seller</li>
+          <li>Seller profiles and saved favourites</li>
+        </ul>
+      </div>
+      <div class="tags"><span class="tag">Python</span><span class="tag">PostgreSQL</span><span class="tag">React</span><span class="tag">Vite</span><span class="tag">TypeScript</span></div>
+    </article>
 
-    <script src="script.js"></script>
+    <article class="project">
+      <div class="thumb"><div class="ill" data-ill="johannaWeb"></div></div>
+      <div>
+        <p class="kind">Company website, DRC</p>
+        <h3>ETS Johanna Business RDC website</h3>
+        <p>The public website of ETS Johanna Business RDC, an agribusiness company in the DRC that produces and sells food products, phytosanitary (crop protection) products and pharmaceutical products. The site presents the company and its activities, organises its catalogue by product line so farmers, retailers and partners quickly find what they need, and makes it easy to get in touch to order or ask for advice.</p>
+        <ul class="features">
+          <li>Company presentation and activities</li>
+          <li>Catalogue by product line</li>
+          <li>Contact and order requests</li>
+          <li>Responsive on phone, tablet and desktop</li>
+        </ul>
+      </div>
+      <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+    </article>
+
+    <article class="project">
+      <div class="thumb"><div class="ill" data-ill="johannaStock"></div></div>
+      <div>
+        <p class="kind">Web app, stock management</p>
+        <h3>ETS Johanna Business RDC stock manager</h3>
+        <p>An internal web app that manages stock for ETS Johanna Business RDC across its food, phytosanitary and pharmaceutical products. Staff record everything that comes in (purchases, production) and goes out (sales), and quantities update in real time. Because many of these products are perishable or regulated, the app tracks batches and expiry dates and warns before stock runs low or expires. Managers get a dashboard and reports to plan purchases and reduce losses.</p>
+        <ul class="features">
+          <li>Stock in and stock out records</li>
+          <li>Low-stock and expiry date alerts</li>
+          <li>Suppliers, sales and batch tracking</li>
+          <li>Dashboard and reports for managers</li>
+        </ul>
+      </div>
+      <div class="tags"><span class="tag">Python</span><span class="tag">PostgreSQL</span><span class="tag">React</span><span class="tag">Vite</span><span class="tag">TypeScript</span></div>
+    </article>
+
+    <article class="project">
+      <div class="thumb"><div class="ill" data-ill="construction"></div></div>
+      <div>
+        <p class="kind">Web app, construction</p>
+        <h3>CSMS, Construction Services Management System</h3>
+        <p>Built for GTC (Global des Travaux de Construction) to streamline construction project management, resource allocation and client communication.</p>
+      </div>
+      <div class="tags"><span class="tag">Project management</span><span class="tag">Database</span><span class="tag">Web application</span></div>
+    </article>
+
+    <article class="project">
+      <div class="thumb"><div class="ill" data-ill="fullstack"></div></div>
+      <div>
+        <p class="kind">Web app</p>
+        <h3>Full-stack web application</h3>
+        <p>A complete web application with a React.js frontend, a Java backend and a PostgreSQL database.</p>
+      </div>
+      <div class="tags"><span class="tag">React.js</span><span class="tag">TypeScript</span><span class="tag">Java</span><span class="tag">PostgreSQL</span></div>
+    </article>
+
+    <article class="project">
+      <div class="thumb"><div class="ill" data-ill="network"></div></div>
+      <div>
+        <p class="kind">System tool</p>
+        <h3>Network management system</h3>
+        <p>Monitors and manages network infrastructure with automated alerting and reporting.</p>
+      </div>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Linux</span><span class="tag">Network</span><span class="tag">Automation</span></div>
+    </article>
+
+    <article class="project">
+      <div class="thumb"><div class="ill" data-ill="database"></div></div>
+      <div>
+        <p class="kind">Developer tool</p>
+        <h3>Database management tool</h3>
+        <p>Manage PostgreSQL databases through a friendly interface with advanced query capabilities.</p>
+      </div>
+      <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Web API</span><span class="tag">JavaScript</span><span class="tag">SQL</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="block alt" id="skills">
+  <div class="wrap">
+    <div class="head"><div><h2>Skills</h2><p>Languages, frameworks and platforms I work with</p></div><div class="ill" data-ill="skills"></div></div>
+    <div class="skills-grid">
+      <div class="skill"><h3><i class="fab fa-react"></i>Frontend</h3>
+        <ul><li>React.js</li><li>TypeScript</li><li>JavaScript</li><li>Vite</li><li>HTML5 &amp; CSS3</li></ul></div>
+      <div class="skill"><h3><i class="fas fa-code"></i>Backend</h3>
+        <ul><li>Java</li><li>Python</li><li>Web API development</li><li>RESTful services</li></ul></div>
+      <div class="skill"><h3><i class="fas fa-database"></i>Database</h3>
+        <ul><li>PostgreSQL</li><li>SQL</li><li>Database design</li></ul></div>
+      <div class="skill"><h3><i class="fas fa-cloud"></i>Cloud &amp; deployment</h3>
+        <ul><li>Neon <small>serverless PostgreSQL</small></li><li>Render <small>app hosting</small></li><li>Cloudflare <small>DNS, CDN &amp; security</small></li></ul></div>
+      <div class="skill"><h3><i class="fas fa-network-wired"></i>Network &amp; tools</h3>
+        <ul><li>Advanced Linux</li><li>Network operations</li><li>Advanced networking (Cisco)</li><li>Postman API testing</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section class="block" id="education">
+  <div class="wrap">
+    <div class="head"><div><h2>Education</h2><p>Degree and certifications</p></div><div class="ill" data-ill="education"></div></div>
+    <div class="t-item"><div class="t-date">2021 – 2025</div><div>
+      <h3>BSc in Software Engineering</h3><h4>Adventist University of Central Africa (AUCA), Kigali</h4>
+      <p>Focused on software development, system architecture and network integration.</p></div></div>
+    <div class="t-item"><div class="t-date">Completed</div><div>
+      <h3>Certificate in Network Operations</h3><h4>Cisco</h4>
+      <p>Network infrastructure, protocols and operational best practices.</p></div></div>
+    <div class="t-item"><div class="t-date">Completed</div><div>
+      <h3>Certificate in Advanced Networking</h3><h4>Cisco</h4>
+      <p>Advanced network design, implementation and troubleshooting.</p></div></div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="block alt" id="contact">
+  <div class="wrap">
+    <div class="head"><div><h2>Contact</h2><p>Open to jobs and freelance projects</p></div><div class="ill" data-ill="contact"></div></div>
+    <p class="contact-big"><a href="mailto:michelamani151@gmail.com">Let's build something together</a></p>
+    <div class="contact-grid">
+      <a class="c-card" href="mailto:michelamani151@gmail.com"><i class="fas fa-envelope"></i><div><small>Email</small><b>michelamani151@gmail.com</b></div></a>
+      <a class="c-card" href="https://linkedin.com/in/michel-cindege-a37742275" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i><div><small>LinkedIn</small><b>michel-cindege-a37742275</b></div></a>
+      <a class="c-card" href="https://github.com/michelamani05" target="_blank" rel="noopener"><i class="fab fa-github"></i><div><small>GitHub</small><b>michelamani05</b></div></a>
+      <a class="c-card" href="tel:+243996748364"><i class="fas fa-phone"></i><div><small>Phone (Airtel DRC)</small><b>+243 996 748 364</b></div></a>
+      <a class="c-card" href="tel:+250791447517"><i class="fas fa-phone"></i><div><small>Phone (MTN Rwanda)</small><b>+250 791 447 517</b></div></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="year">2026</span> AMANI CINDEGE Michel. All rights reserved.</span>
+    <div class="social">
+      <a href="https://linkedin.com/in/michel-cindege-a37742275" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://github.com/michelamani05" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="mailto:michelamani151@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ TRANSITION OVERLAY ============ -->
+<div class="pt" id="pt" aria-hidden="true">
+  <div class="pt-layer pt-l1"></div>
+  <div class="pt-layer pt-l2"><div id="ptSlot"></div><div class="pt-bar"><i></i></div></div>
+</div>
+<div class="sr-only" id="announce" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></div>
+
+<script src="script.js"></script>
 </body>
 </html>
