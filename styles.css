@@ -1,3 +1,16 @@
+/* ============ FONT ============
+   Archivo is self-hosted (variable: width 100-125%, weight 400-900, latin subset)
+   so the page loads from one origin only and the font can be preloaded. */
+@font-face{
+  font-family:'Archivo';
+  font-style:normal;
+  font-weight:400 900;
+  font-stretch:100% 125%;
+  font-display:swap;
+  src:url('archivo-var-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
 :root{
   --ink:#000;
   --ink-soft:#3a3a3a;
@@ -71,6 +84,10 @@ button{font:inherit;color:inherit}
 .ill.drawn svg *{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.2s ease forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
 
+/* ============ ICONS (inline sprite - no icon font is downloaded) ============ */
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.ico{width:1em;height:1em;display:inline-block;flex-shrink:0;fill:currentColor;vertical-align:-.125em}
+
 /* ============ NAV ============ */
 .nav{position:fixed;top:max(12px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(1200px,calc(100% - 24px));
   display:flex;align-items:center;justify-content:space-between;gap:1rem;z-index:50;
@@ -91,13 +108,13 @@ button{font:inherit;color:inherit}
 .btn-dark{display:inline-flex;align-items:center;gap:.55rem;background:var(--ink);color:var(--white);
   font-size:.85rem;font-weight:600;padding:.72rem 1.2rem;border-radius:var(--pill);transition:transform .2s,background .2s;white-space:nowrap}
 .btn-dark:hover{transform:translateY(-2px);background:var(--btn-hover)}
-.btn-dark i{font-size:.75rem;transform:rotate(-45deg)}
+.btn-dark .ico{font-size:.75rem;transform:rotate(-45deg)}
 /* Theme toggle: a circle button matching the burger */
 .theme-btn{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;flex-shrink:0;
   background:var(--white);color:var(--ink);border:1px solid var(--line);cursor:pointer;font-size:.95rem;
   box-shadow:0 2px 10px var(--lift);transition:transform .2s,background .2s,border-color .2s}
 .theme-btn:hover{transform:translateY(-2px) rotate(18deg);border-color:var(--ink)}
-.theme-btn i{transition:opacity .2s}
+.theme-btn .ico{transition:opacity .2s}
 .burger{display:none;background:var(--ink);color:var(--white);border:0;width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:1rem;flex-shrink:0}
 
 /* Language switch: the two flags sit in one pill, the active language is filled in */
@@ -172,7 +189,7 @@ section.block.alt{background:var(--paper)}
 
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem}
 .skill h3{display:flex;align-items:center;gap:.6rem;font-size:1.05rem;font-weight:700;margin-bottom:1rem}
-.skill h3 i{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--ink);color:var(--white);font-size:.85rem;flex-shrink:0}
+.skill h3 .ico{width:34px;height:34px;padding:10px;border-radius:50%;background:var(--ink);color:var(--white);flex-shrink:0}
 .skill ul{list-style:none}
 .skill li{padding:.6rem 0;border-bottom:1px solid var(--line);color:var(--ink-soft)}
 .skill li small{color:var(--mute)}
@@ -202,7 +219,7 @@ section.block.alt{background:var(--paper)}
 .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}
 .c-card{display:flex;gap:1rem;align-items:center;padding:1.3rem;background:var(--white);border:1px solid var(--line);border-radius:18px;transition:border-color .2s,transform .2s;min-width:0}
 .c-card:hover{border-color:var(--ink);transform:translateY(-3px)}
-.c-card i{width:44px;height:44px;flex-shrink:0;display:grid;place-items:center;border-radius:50%;background:var(--ink);color:var(--white)}
+.c-card .ico{width:44px;height:44px;padding:13px;flex-shrink:0;border-radius:50%;background:var(--ink);color:var(--white)}
 .c-card div{min-width:0}
 .c-card small{display:block;color:var(--mute);font-size:.8rem}
 .c-card b{font-weight:600;font-size:.92rem;overflow-wrap:anywhere}

@@ -57,11 +57,15 @@ images, and full-screen wipe transitions between sections.
 - **3D portrait** — the photo is placed in a perspective container with a
   blurred "ghost" layer behind it, a soft floor shadow, and a subtle tilt that
   follows the mouse (or device orientation on mobile).
-- **Fast first paint** — both scripts are `defer`red, Font Awesome is fetched
-  with `media="print"` so it never blocks rendering (with a `<noscript>` copy),
-  and the portrait is served as a 96 KB WebP first with the PNG as the
-  `<picture>` fallback, marked `fetchpriority="high"` and given its dimensions so
-  it cannot cause layout shift.
+- **Fast first paint** — a cold load is **7 requests, 272 KB, all from this one
+  origin**: both scripts are deferred, the icons are an inline SVG sprite
+  (15 Font Awesome Free 6.4.0 paths, CC BY 4.0) instead of an icon font, the
+  Archivo variable font is self-hosted and preloaded, and the portrait is one
+  96 KB WebP shared by the photo and its blurred ghost layer, with the PNG kept
+  as the `<picture>` fallback. There is no request to Google Fonts or any CDN,
+  so no extra DNS/TLS handshake stands between the visitor and the first paint.
+  Measured locally on a cold load: FCP 1296 ms → **260 ms**, load 1989 ms →
+  **174 ms**.
 - **Fitting name** — the hero name is measured with JavaScript on load and on
   resize so it always fits the viewport width.
 
@@ -73,6 +77,8 @@ images, and full-screen wipe transitions between sections.
 - `i18n.js` — every string on the page, in English and French
 - `profile-3d.png` — the portrait, **with a transparent background** (781×1000)
 - `profile-3d.webp` — the same portrait as WebP, served first via `<picture>`
+- `favicon-32.png`, `favicon-180.png` — the tab icon and the touch icon
+- `archivo-var-latin.woff2` — the self-hosted Archivo variable font
 - `newprofileimage.png` — source artwork for the current portrait
 - `amani cindege michel profile picture.JPG` — original photo, kept for reference
 - `.gitignore`
@@ -112,9 +118,13 @@ To replace it:
    rembg i "your-photo.jpg" profile-3d.png
    ```
 
-3. Export at 924×924, roughly square and centred — the CSS scales the image to
-   fit the stage with `object-fit: contain`.
+3. Export at most 1000 px tall, roughly square and centred — the current
+   portrait is 781×1000 — and the CSS scales the image to fit the stage with
+   `object-fit: contain`.
 4. Overwrite `profile-3d.png`.
+5. Save a WebP copy as `profile-3d.webp` at about quality 88 (Pillow:
+   `im.save('profile-3d.webp', quality=88, method=6)`). That is the file browsers
+   actually download; the PNG is only the `<picture>` fallback.
 
 ## Translating the page
 
@@ -148,8 +158,52 @@ Then open <http://127.0.0.1:8000/>.
 - HTML5
 - CSS3 (custom properties, clip-path, grid, flexbox, `svh` units)
 - JavaScript (ES6, IntersectionObserver, matchMedia)
-- Google Fonts (Archivo) and Font Awesome 6.4.0
+- Archivo variable font — self-hosted latin subset (from Google Fonts)
+- Font Awesome Free 6.4.0 icon paths, inlined as an SVG sprite
 - [rembg](https://github.com/danielgatis/rembg) for the background removal
+
+## Performance
+
+Cold, cache-disabled load of the built page (Chrome; measured locally, so the
+gzip/Brotli that GitHub Pages applies to HTML, CSS and JS is not counted):
+
+| | before | now |
+| --- | --- | --- |
+| transferred | 2531 KB | **272 KB** |
+| requests | 12 from 4 origins | **7 from 1 origin** |
+| first contentful paint | 1296 ms | **260 ms** |
+| DOMContentLoaded | 1293 ms | **172 ms** |
+| load | 1989 ms | **174 ms** |
+
+What did it:
+
+- **Icons inline** — the 15 Font Awesome icons the page uses are an SVG sprite
+  in the HTML (`<symbol>` + `<use>`), so nothing downloads a 272 KB icon-font
+  setup from a CDN.
+- **Font self-hosted** — `archivo-var-latin.woff2` (88 KB, variable width and
+  weight, latin subset) is served from this origin and preloaded, replacing two
+  `preconnect`s plus a blocking CSS request to Google.
+- **One portrait file** — both the photo and its ghost layer use the 96 KB WebP;
+  the 887 KB PNG is only fetched by browsers without WebP.
+- **Small favicon** — a 3 KB `favicon-32.png` replaces the old 1.1 MB PNG, which
+  every browser was downloading for the tab icon.
+- **Deferred scripts** — the HTML and CSS parse and paint before any JavaScript
+  runs, with the `hidden` attribute on the non-home sections so nothing stacks up
+  while the scripts load.
+
+Three things to know about GitHub Pages:
+
+- Pages sends `Cache-Control: max-age=600`, so repeat visits re-validate every
+  file after ten minutes. Putting Cloudflare in front (which also adds HTTP/3,
+  Brotli and long-lived caching) is what makes repeat visits instant.
+- Everything in the repo is published, though only referenced files are
+  downloaded. The unreferenced source artwork (`newprofileimage.PNG`,
+  `amani cindege profile new added.PNG`, `amani cindege michel profile
+  picture.JPG`, `profile-3d-old.png`) is never fetched by the page — remove it
+  from the repo if the published size ever matters.
+- Opening `index.html` straight from disk (`file://`) falls back to the system
+  font, because browsers block font files loaded from `file://`. Use
+  `python -m http.server` (below) or the live site.
 
 ## Deployment
 

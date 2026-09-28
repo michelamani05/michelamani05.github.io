@@ -85,7 +85,7 @@ const links = document.getElementById('navLinks');
 function setMenu(open){
   links.classList.toggle('open', open);
   burger.setAttribute('aria-expanded', open);
-  burger.innerHTML = open ? '<i class="fas fa-xmark"></i>' : '<i class="fas fa-bars"></i>';
+  burger.innerHTML = open ? '<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-xmark"></use></svg>' : '<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bars"></use></svg>';
 }
 burger.addEventListener('click', ()=>setMenu(!links.classList.contains('open')));
 
@@ -167,7 +167,7 @@ function paintTheme(){
   document.documentElement.setAttribute('data-theme', theme);
   const toDark = theme !== 'dark';
   themeBtn.innerHTML = toDark
-    ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+    ? '<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-moon"></use></svg>' : '<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sun"></use></svg>';
   const label = toDark ? t('theme.dark', 'Switch to dark mode') : t('theme.light', 'Switch to light mode');
   themeBtn.setAttribute('aria-label', label);
   themeBtn.setAttribute('title', label);
