@@ -56,6 +56,7 @@ images, and full-screen wipe transitions between sections.
 - `styles.css` — all styling
 - `script.js` — all behaviour and the line illustrations
 - `profile-3d.png` — the portrait, **with a transparent background**
+- `newprofileimage.png` — source artwork for the current portrait
 - `amani cindege michel profile picture.JPG` — original photo, kept for reference
 - `.gitignore`
 
@@ -63,28 +64,40 @@ images, and full-screen wipe transitions between sections.
 
 The hero loads `profile-3d.png` and expects a **transparent background**.
 A photo with a white background will look wrong, because the page draws a
-drop shadow and a blurred layer behind the cut-out.
+drop shadow and a blurred layer behind the image.
 
 If `profile-3d.png` is missing or fails to load, the page falls back to a grey
 silhouette placeholder with the text "Add profile-3d.png" — the site never
 breaks, it just loses the portrait.
 
+The current portrait keeps its own original shape exactly as drawn. Only the flat
+light-grey field around it is made transparent — no circular mask, no rim, no
+border is applied by CSS, so the subject's true silhouette is preserved.
+
 To replace it:
 
 1. Put your new photo in this folder.
-2. Remove the background:
+2. Make the background transparent. For a flat single-colour field:
+
+   ```bash
+   pip install pillow numpy
+   ```
+
+   then threshold the background, keep the largest dark region, fit a circle to
+   the band above the shoulders (the shoulders themselves spill past the badge,
+   so a full-silhouette bounding box would just return the whole frame), and
+   apply an antialiased circular mask.
+
+   For a full-body photo instead, use:
 
    ```bash
    pip install "rembg[cpu]"
    rembg i "your-photo.jpg" profile-3d.png
    ```
 
-3. Crop the result to head and shoulders, with the bottom edge cut straight
-   across at the shoulders, so the image sits correctly on the "floor" shadow.
+3. Export at 924×924, roughly square and centred — the CSS scales the image to
+   fit the stage with `object-fit: contain`.
 4. Overwrite `profile-3d.png`.
-
-Keep the proportions roughly square and the subject centred — the CSS scales
-the image to the height of the stage.
 
 ## Run it locally
 
