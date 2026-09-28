@@ -20,6 +20,9 @@ function prepIll(el, key){
 }
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* Strings owned by this file (transition scenes, theme button) live in i18n.js */
+const t = (key, fallback) => (window.i18n ? window.i18n.t(key, fallback) : (fallback || key));
+
 /* Draw illustrations in the page when they scroll into view */
 const drawObs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.replace('pending','drawn'); drawObs.unobserve(e.target); } });
@@ -105,12 +108,12 @@ window.addEventListener('popstate', () => showView(location.hash.slice(1) || 'ho
 /* ---------- 3-second section transition ---------- */
 const DURATION = 3000;
 const SCENES = {
-  home:{title:'Hello', sub:'AMANI CINDEGE Michel, software engineer'},
-  about:{title:'About me', sub:'Software engineer from Kigali and Bukavu'},
-  projects:{title:'Selected work', sub:'7 projects, from marketplaces to stock management'},
-  skills:{title:'Skills', sub:'From React and Python to Neon, Render and Cloudflare'},
-  education:{title:'Education', sub:'AUCA degree and Cisco certifications'},
-  contact:{title:'Contact', sub:"Let's build something together"}
+  home:{title:'scene.home.title', sub:'scene.home.sub'},
+  about:{title:'scene.about.title', sub:'scene.about.sub'},
+  projects:{title:'scene.projects.title', sub:'scene.projects.sub'},
+  skills:{title:'scene.skills.title', sub:'scene.skills.sub'},
+  education:{title:'scene.education.title', sub:'scene.education.sub'},
+  contact:{title:'scene.contact.title', sub:'scene.contact.sub'}
 };
 const pt = document.getElementById('pt');
 const slot = document.getElementById('ptSlot');
@@ -126,7 +129,8 @@ function goTo(id){
   setMenu(false);
   if(reduce){ jumpTo(target); return; }
   busy = true;
-  const scene = SCENES[id] || {title:id, sub:''};
+  const keys = SCENES[id] || {title:id, sub:''};
+  const scene = { title: t(keys.title, keys.title), sub: t(keys.sub, keys.sub) };
   slot.innerHTML = `<div class="pt-inner"><div class="ill"></div><div class="pt-title">${scene.title}</div><p class="pt-sub">${scene.sub}</p></div>`;
   prepIll(slot.querySelector('.ill'), id === 'home' ? 'home' : id);
   slot.querySelectorAll('.ill svg *').forEach((s,i)=>s.style.animationDelay = (0.75 + i*0.09)+'s');
@@ -159,9 +163,9 @@ function paintTheme(){
   const toDark = theme !== 'dark';
   themeBtn.innerHTML = toDark
     ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
-  themeBtn.setAttribute('aria-label',
-    toDark ? 'Switch to dark mode' : 'Switch to light mode');
-  themeBtn.setAttribute('title', toDark ? 'Switch to dark mode' : 'Switch to light mode');
+  const label = toDark ? t('theme.dark', 'Switch to dark mode') : t('theme.light', 'Switch to light mode');
+  themeBtn.setAttribute('aria-label', label);
+  themeBtn.setAttribute('title', label);
   themeBtn.setAttribute('aria-pressed', String(!toDark));
 }
 
@@ -179,3 +183,6 @@ darkMq.addEventListener('change', e=>{
 });
 
 paintTheme();
+
+/* The theme button wording changes with the language, so re-paint it on a switch */
+document.addEventListener('langchange', ()=>paintTheme());

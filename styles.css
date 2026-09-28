@@ -79,6 +79,8 @@ button{font:inherit;color:inherit}
 .nav.scrolled{box-shadow:0 10px 30px var(--lift-2)}
 .status{display:flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:500;background:var(--white);
   padding:.55rem .95rem;border-radius:var(--pill);box-shadow:0 2px 10px var(--lift);white-space:nowrap}
+/* the short wording only shows up on narrow screens (see the media queries) */
+.status-short{display:none}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--live);animation:pulse 2s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.6)}70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
 .nav-links{display:flex;gap:2rem;font-size:.88rem;font-weight:500}
@@ -97,6 +99,17 @@ button{font:inherit;color:inherit}
 .theme-btn:hover{transform:translateY(-2px) rotate(18deg);border-color:var(--ink)}
 .theme-btn i{transition:opacity .2s}
 .burger{display:none;background:var(--ink);color:var(--white);border:0;width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:1rem;flex-shrink:0}
+
+/* Language switch: the two flags sit in one pill, the active language is filled in */
+.lang{display:flex;align-items:center;gap:.2rem;padding:.22rem;flex-shrink:0;
+  background:var(--white);border:1px solid var(--line);border-radius:var(--pill);box-shadow:0 2px 10px var(--lift)}
+.lang-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.34rem .55rem;border:0;background:transparent;
+  border-radius:var(--pill);cursor:pointer;font-size:.75rem;font-weight:700;letter-spacing:.04em;color:var(--mute);
+  transition:background .2s,color .2s,transform .2s}
+.lang-btn:hover{color:var(--ink);transform:translateY(-1px)}
+.lang-btn[aria-pressed="true"]{background:var(--ink);color:var(--white)}
+.lang-btn .flag{width:22px;height:15px;border-radius:2px;flex-shrink:0;display:block;box-shadow:0 0 0 1px rgba(128,128,128,.45)}
+.lang-btn .lang-code{display:block;line-height:1}
 
 /* ============ HERO ============ */
 .hero{position:relative;min-height:100svh;padding-top:clamp(90px,12vh,120px);overflow:hidden;
@@ -228,7 +241,13 @@ footer .social a:hover{background:var(--foot-hover-bg);color:var(--foot-hover-fg
 /* ============ RESPONSIVE ============ */
 /* Laptop / small desktop */
 @media (max-width:1180px){
-  .nav-links{gap:1.4rem}
+  /* French wording runs longer than the English, so the nav gets a little more room here */
+  .nav{gap:.7rem}
+  .nav-links{gap:.95rem}
+  .status{font-size:.72rem;padding:.45rem .75rem}
+  .lang .lang-code{font-size:.7rem}
+  .lang-btn{padding:.28rem .38rem}
+  .nav .btn-dark{padding:.6rem .9rem;font-size:.8rem}
   .project{grid-template-columns:150px 1fr}
   .tags{grid-column:2;justify-content:flex-start}
 }
@@ -258,6 +277,8 @@ footer .social a:hover{background:var(--foot-hover-bg);color:var(--foot-hover-fg
 @media (max-width:760px){
   .nav .btn-dark{display:none}
   .status{margin-right:auto}
+  .lang-btn{padding:.4rem .45rem}
+  .lang-btn .lang-code{display:none}
   .name{line-height:.95}
   .name span{display:table;margin:0 auto}
   .name .w1{margin-right:auto}
@@ -275,10 +296,24 @@ footer .social a:hover{background:var(--foot-hover-bg);color:var(--foot-hover-fg
 }
 /* Phones */
 @media (max-width:480px){
-  .status{font-size:.72rem;padding:.5rem .8rem}
+  .nav{gap:.55rem}
+  .status{font-size:.7rem;padding:.45rem .7rem}
+  .lang{padding:.18rem}
+  .theme-btn,.burger{width:38px;height:38px}
   .skills-grid{grid-template-columns:1fr}
   .pill{font-size:.8rem;padding:.55rem .9rem}
   .fact span{font-size:.85rem}
+}
+/* The French status wording runs much longer than the English, so it goes short earlier */
+@media (max-width:1280px){
+  html[data-lang="fr"] .status-long{display:none}
+  html[data-lang="fr"] .status-short{display:inline}
+}
+/* Narrow phones: the status pill falls back to its short wording so the nav still fits */
+@media (max-width:560px){
+  .status-long{display:none}
+  .status-short{display:inline}
+  .lang-btn .flag{width:24px;height:16px}
 }
 /* Phones in landscape: keep the photo from filling the whole screen */
 @media (max-height:500px) and (orientation:landscape){

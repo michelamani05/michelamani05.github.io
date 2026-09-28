@@ -31,6 +31,16 @@ images, and full-screen wipe transitions between sections.
   operating system setting via `prefers-color-scheme`; the choice is saved to
   `localStorage` under `theme` and takes precedence over the OS from then on.
   `color-scheme` is set too, so form controls and scrollbars match.
+- **English / French** — the two flags in the nav (USA and France, both drawn as
+  inline SVG so the language switch never depends on emoji fonts) switch the
+  whole page. Every string lives in `i18n.js`, keyed by the `data-i18n`
+  attributes in `index.html`; the English wording also stays in the HTML as a
+  fallback, so the page still reads correctly if the script never runs. A small
+  script in `<head>` picks the language before the first paint — `?lang=fr` in
+  the URL wins, then the saved choice, then the browser language — and the
+  choice is written back to the URL, so a link can be shared in either
+  language. The transition scenes and the theme-button wording come from the
+  same dictionary, so nothing is left in English when French is active.
 - **3-second menu transition** — clicking any menu item (or an in-page link)
   plays a full-screen overlay: two clip-path layers wipe in, a line
   illustration draws itself, the section title fades in, and a progress bar
@@ -55,6 +65,7 @@ images, and full-screen wipe transitions between sections.
 - `index.html` — page structure
 - `styles.css` — all styling
 - `script.js` — all behaviour and the line illustrations
+- `i18n.js` — every string on the page, in English and French
 - `profile-3d.png` — the portrait, **with a transparent background**
 - `newprofileimage.png` — source artwork for the current portrait
 - `amani cindege michel profile picture.JPG` — original photo, kept for reference
@@ -98,6 +109,25 @@ To replace it:
 3. Export at 924×924, roughly square and centred — the CSS scales the image to
    fit the stage with `object-fit: contain`.
 4. Overwrite `profile-3d.png`.
+
+## Translating the page
+
+All copy lives in `i18n.js` as two flat objects, `I18N.en` and `I18N.fr`. To
+change or add a string: give the element in `index.html` a `data-i18n="key"`
+attribute, then add that key to both objects. For an attribute instead of text,
+use `data-i18n-attr="aria-label:key"` (separate several with `|`) — that is how
+the nav, the language switch, the burger button, the theme button and the
+footer social links are translated.
+
+Wording that lives in `script.js` — the six transition scenes and the theme
+button label — is read from the same dictionary through `window.i18n.t(key)` and
+re-painted when a `langchange` event fires. The switcher is `#lang` in the nav:
+one button per language with `data-lang="en|fr"`, and the styling fills in
+whichever one has `aria-pressed="true"`. Adding a third language means adding a
+code to `LANGS` in `i18n.js`, a third object, and a third button.
+
+`?lang=en` or `?lang=fr` in the URL forces a language and is saved, so
+`https://michelamani05.github.io/?lang=fr` is a ready-made French link.
 
 ## Run it locally
 

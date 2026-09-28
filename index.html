@@ -22,22 +22,47 @@
 })();
 </script>
 
+<script>
+/* Language: ?lang= wins, then the saved choice, then the browser, applied before first paint */
+(function(){
+  try{
+    var q = new URLSearchParams(location.search).get('lang');
+    var l = q || localStorage.getItem('lang');
+    if(!l) l = ((navigator.language || 'en').toLowerCase().indexOf('fr') === 0) ? 'fr' : 'en';
+    if(l !== 'en' && l !== 'fr') l = 'en';
+    if(q) localStorage.setItem('lang', l);
+    document.documentElement.setAttribute('lang', l);
+    document.documentElement.setAttribute('data-lang', l);
+  }catch(e){}
+})();
+</script>
+
 </head>
 <body class="intro">
 
 <!-- ============ NAV ============ -->
-<nav class="nav" id="nav" aria-label="Main">
-  <a href="#home" class="status"><span class="dot"></span>Available for new opportunities</a>
+<nav class="nav" id="nav" data-i18n-attr="aria-label:nav.main" aria-label="Main">
+  <a href="#home" class="status"><span class="dot" aria-hidden="true"></span><span class="status-long" data-i18n="nav.status.long">Available for new opportunities</span><span class="status-short" data-i18n="nav.status.short">Available</span></a>
   <div class="nav-links" id="navLinks">
-    <a href="#about">About</a>
-    <a href="#projects">Work<sup>(07)</sup></a>
-    <a href="#skills">Skills<sup>(05)</sup></a>
-    <a href="#education">Education<sup>(03)</sup></a>
-    <a href="#contact">Contact</a>
+    <a href="#about"><span data-i18n="nav.about">About</span></a>
+    <a href="#projects"><span data-i18n="nav.projects">Work</span><sup>(07)</sup></a>
+    <a href="#skills"><span data-i18n="nav.skills">Skills</span><sup>(05)</sup></a>
+    <a href="#education"><span data-i18n="nav.education">Education</span><sup>(03)</sup></a>
+    <a href="#contact"><span data-i18n="nav.contact">Contact</span></a>
   </div>
-  <a href="#contact" class="btn-dark">Let's talk <i class="fas fa-arrow-right"></i></a>
-  <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch to dark mode" title="Switch theme"><i class="fas fa-moon"></i></button>
-  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><i class="fas fa-bars"></i></button>
+  <a href="#contact" class="btn-dark"><span data-i18n="nav.cta">Let's talk</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+  <div class="lang" id="lang" role="group" data-i18n-attr="aria-label:lang.group" aria-label="Language">
+    <button class="lang-btn" type="button" data-lang="en" aria-pressed="false" aria-label="English" title="English (USA)">
+      <svg class="flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><rect width="30" height="20" fill="#fff"/><g fill="#b22234"><rect width="30" height="1.54" y="0"/><rect width="30" height="1.54" y="3.08"/><rect width="30" height="1.54" y="6.15"/><rect width="30" height="1.54" y="9.23"/><rect width="30" height="1.54" y="12.31"/><rect width="30" height="1.54" y="15.38"/><rect width="30" height="1.54" y="18.46"/></g><rect width="12.5" height="10.77" fill="#3c3b6e"/><g fill="#fff"><circle cx="2" cy="1.3" r=".55"/><circle cx="4.8" cy="1.3" r=".55"/><circle cx="7.6" cy="1.3" r=".55"/><circle cx="10.4" cy="1.3" r=".55"/><circle cx="2" cy="3.1" r=".55"/><circle cx="4.8" cy="3.1" r=".55"/><circle cx="7.6" cy="3.1" r=".55"/><circle cx="10.4" cy="3.1" r=".55"/><circle cx="2" cy="4.9" r=".55"/><circle cx="4.8" cy="4.9" r=".55"/><circle cx="7.6" cy="4.9" r=".55"/><circle cx="10.4" cy="4.9" r=".55"/><circle cx="2" cy="6.7" r=".55"/><circle cx="4.8" cy="6.7" r=".55"/><circle cx="7.6" cy="6.7" r=".55"/><circle cx="10.4" cy="6.7" r=".55"/><circle cx="2" cy="8.5" r=".55"/><circle cx="4.8" cy="8.5" r=".55"/><circle cx="7.6" cy="8.5" r=".55"/><circle cx="10.4" cy="8.5" r=".55"/></g></svg>
+      <span class="lang-code" aria-hidden="true">EN</span>
+    </button>
+    <button class="lang-btn" type="button" data-lang="fr" lang="fr" aria-pressed="false" aria-label="Français" title="Français (France)">
+      <svg class="flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false"><rect width="30" height="20" fill="#fff"/><rect width="10" height="20" fill="#002395"/><rect x="20" width="10" height="20" fill="#ed2939"/></svg>
+      <span class="lang-code" aria-hidden="true">FR</span>
+    </button>
+  </div>
+  <button class="theme-btn" id="themeBtn" type="button" data-i18n-attr="aria-label:theme.dark|title:theme.title" aria-label="Switch to dark mode" title="Switch theme"><i class="fas fa-moon" aria-hidden="true"></i></button>
+  <button class="burger" id="burger" data-i18n-attr="aria-label:nav.openMenu" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><i class="fas fa-bars" aria-hidden="true"></i></button>
 </nav>
 
 <!-- ============ HERO ============ -->
@@ -58,22 +83,22 @@
           <circle cx="200" cy="150" r="95" fill="url(#g)"/>
           <path d="M20 460 C30 330 110 270 200 270 C290 270 370 330 380 460 Z" fill="url(#g)"/>
         </svg>
-        <span>Add profile-3d.png</span>
+        <span data-i18n="hero.placeholder">Add profile-3d.png</span>
       </div>
     </div>
   </div>
 
   <div class="hero-info">
     <div class="hero-left">
-      <h2>Software Engineer</h2>
-      <p>AUCA 2025 graduate building web and mobile apps for businesses in Rwanda and the DRC, with Cisco-certified networking skills underneath.</p>
-      <a href="#contact" class="btn-dark">Let's collaborate <i class="fas fa-arrow-right"></i></a>
+      <h2 data-i18n="hero.role">Software Engineer</h2>
+      <p data-i18n="hero.pitch">AUCA 2025 graduate building web and mobile apps for businesses in Rwanda and the DRC, with Cisco-certified networking skills underneath.</p>
+      <a href="#contact" class="btn-dark"><span data-i18n="hero.cta">Let's collaborate</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
     </div>
     <div class="hero-right">
-      <a class="pill" href="https://linkedin.com/in/michel-cindege-a37742275" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i>LinkedIn</a>
-      <a class="pill" href="https://github.com/michelamani05" target="_blank" rel="noopener"><i class="fab fa-github"></i>GitHub</a>
-      <a class="pill" href="mailto:michelamani151@gmail.com"><i class="fas fa-envelope"></i>Email</a>
-      <a class="pill" href="tel:+250791447517"><i class="fas fa-phone"></i>Call</a>
+      <a class="pill" href="https://linkedin.com/in/michel-cindege-a37742275" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true"></i><span data-i18n="hero.linkedin">LinkedIn</span></a>
+      <a class="pill" href="https://github.com/michelamani05" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i><span data-i18n="hero.github">GitHub</span></a>
+      <a class="pill" href="mailto:michelamani151@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i><span data-i18n="hero.email">Email</span></a>
+      <a class="pill" href="tel:+250791447517"><i class="fas fa-phone" aria-hidden="true"></i><span data-i18n="hero.call">Call</span></a>
     </div>
   </div>
 </header>
@@ -81,18 +106,18 @@
 <!-- ============ ABOUT ============ -->
 <section class="block alt" id="about">
   <div class="wrap">
-    <div class="head"><div><h2>About me</h2><p>Kigali, Rwanda and Bukavu, DRC</p></div><div class="ill" data-ill="about"></div></div>
+    <div class="head"><div><h2 data-i18n="about.title">About me</h2><p data-i18n="about.sub">Kigali, Rwanda and Bukavu, DRC</p></div><div class="ill" data-ill="about"></div></div>
     <div class="about-grid">
       <div>
-        <p class="lead">I'm a Software Engineering graduate from the Adventist University of Central Africa (AUCA) in Kigali, class of 2025. I like building software that solves real, complicated problems.</p>
-        <p>Alongside software engineering, I hold certifications in Network Operations and Advanced Networking with Cisco technologies, so I build applications with a solid understanding of the infrastructure and systems they run on.</p>
-        <p>My skills cover modern web technologies, backend development and database management, and I deploy my work on cloud platforms like Neon, Render and Cloudflare.</p>
+        <p class="lead" data-i18n="about.p1">I'm a Software Engineering graduate from the Adventist University of Central Africa (AUCA) in Kigali, class of 2025. I like building software that solves real, complicated problems.</p>
+        <p data-i18n="about.p2">Alongside software engineering, I hold certifications in Network Operations and Advanced Networking with Cisco technologies, so I build applications with a solid understanding of the infrastructure and systems they run on.</p>
+        <p data-i18n="about.p3">My skills cover modern web technologies, backend development and database management, and I deploy my work on cloud platforms like Neon, Render and Cloudflare.</p>
       </div>
       <div>
-        <div class="fact"><strong>2025</strong><span>Graduation year</span></div>
-        <div class="fact"><strong>5+</strong><span>Technical certifications</span></div>
-        <div class="fact"><strong>10+</strong><span>Programming languages</span></div>
-        <div class="fact"><strong>7</strong><span>Projects shipped</span></div>
+        <div class="fact"><strong>2025</strong><span data-i18n="about.f1">Graduation year</span></div>
+        <div class="fact"><strong>5+</strong><span data-i18n="about.f2">Technical certifications</span></div>
+        <div class="fact"><strong>10+</strong><span data-i18n="about.f3">Programming languages</span></div>
+        <div class="fact"><strong>7</strong><span data-i18n="about.f4">Projects shipped</span></div>
       </div>
     </div>
   </div>
@@ -101,19 +126,19 @@
 <!-- ============ PROJECTS ============ -->
 <section class="block" id="projects">
   <div class="wrap">
-    <div class="head"><div><h2>Selected work</h2><p>7 projects, from marketplaces to stock management</p></div><div class="ill" data-ill="projects"></div></div>
+    <div class="head"><div><h2 data-i18n="projects.title">Selected work</h2><p data-i18n="projects.sub">7 projects, from marketplaces to stock management</p></div><div class="ill" data-ill="projects"></div></div>
 
     <article class="project">
       <div class="thumb"><div class="ill" data-ill="sokoni"></div></div>
       <div>
-        <p class="kind">Mobile app, Bukavu</p>
+        <p class="kind" data-i18n="p1.kind">Mobile app, Bukavu</p>
         <h3>SOKONI</h3>
-        <p>A buy-and-sell marketplace app for Bukavu, inspired by Vinted. People sell the clothes, electronics and household items they no longer use, and buy from others nearby at fair prices. Sellers post an item with photos, a price, a category and its condition in a few taps; buyers browse, search, save favourites and message the seller directly to agree on the deal. The mobile-first interface is built to load fast on local networks.</p>
+        <p data-i18n="p1.desc">A buy-and-sell marketplace app for Bukavu, inspired by Vinted. People sell the clothes, electronics and household items they no longer use, and buy from others nearby at fair prices. Sellers post an item with photos, a price, a category and its condition in a few taps; buyers browse, search, save favourites and message the seller directly to agree on the deal. The mobile-first interface is built to load fast on local networks.</p>
         <ul class="features">
-          <li>Post items with photos, price and condition</li>
-          <li>Search and filter by category and price</li>
-          <li>Direct messaging between buyer and seller</li>
-          <li>Seller profiles and saved favourites</li>
+          <li data-i18n="p1.f1">Post items with photos, price and condition</li>
+          <li data-i18n="p1.f2">Search and filter by category and price</li>
+          <li data-i18n="p1.f3">Direct messaging between buyer and seller</li>
+          <li data-i18n="p1.f4">Seller profiles and saved favourites</li>
         </ul>
       </div>
       <div class="tags"><span class="tag">Python</span><span class="tag">PostgreSQL</span><span class="tag">React</span><span class="tag">Vite</span><span class="tag">TypeScript</span></div>
@@ -122,14 +147,14 @@
     <article class="project">
       <div class="thumb"><div class="ill" data-ill="johannaWeb"></div></div>
       <div>
-        <p class="kind">Company website, DRC</p>
-        <h3>ETS Johanna Business RDC website</h3>
-        <p>The public website of ETS Johanna Business RDC, an agribusiness company in the DRC that produces and sells food products, phytosanitary (crop protection) products and pharmaceutical products. The site presents the company and its activities, organises its catalogue by product line so farmers, retailers and partners quickly find what they need, and makes it easy to get in touch to order or ask for advice.</p>
+        <p class="kind" data-i18n="p2.kind">Company website, DRC</p>
+        <h3 data-i18n="p2.title">ETS Johanna Business RDC website</h3>
+        <p data-i18n="p2.desc">The public website of ETS Johanna Business RDC, an agribusiness company in the DRC that produces and sells food products, phytosanitary (crop protection) products and pharmaceutical products. The site presents the company and its activities, organises its catalogue by product line so farmers, retailers and partners quickly find what they need, and makes it easy to get in touch to order or ask for advice.</p>
         <ul class="features">
-          <li>Company presentation and activities</li>
-          <li>Catalogue by product line</li>
-          <li>Contact and order requests</li>
-          <li>Responsive on phone, tablet and desktop</li>
+          <li data-i18n="p2.f1">Company presentation and activities</li>
+          <li data-i18n="p2.f2">Catalogue by product line</li>
+          <li data-i18n="p2.f3">Contact and order requests</li>
+          <li data-i18n="p2.f4">Responsive on phone, tablet and desktop</li>
         </ul>
       </div>
       <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
@@ -138,14 +163,14 @@
     <article class="project">
       <div class="thumb"><div class="ill" data-ill="johannaStock"></div></div>
       <div>
-        <p class="kind">Web app, stock management</p>
-        <h3>ETS Johanna Business RDC stock manager</h3>
-        <p>An internal web app that manages stock for ETS Johanna Business RDC across its food, phytosanitary and pharmaceutical products. Staff record everything that comes in (purchases, production) and goes out (sales), and quantities update in real time. Because many of these products are perishable or regulated, the app tracks batches and expiry dates and warns before stock runs low or expires. Managers get a dashboard and reports to plan purchases and reduce losses.</p>
+        <p class="kind" data-i18n="p3.kind">Web app, stock management</p>
+        <h3 data-i18n="p3.title">ETS Johanna Business RDC stock manager</h3>
+        <p data-i18n="p3.desc">An internal web app that manages stock for ETS Johanna Business RDC across its food, phytosanitary and pharmaceutical products. Staff record everything that comes in (purchases, production) and goes out (sales), and quantities update in real time. Because many of these products are perishable or regulated, the app tracks batches and expiry dates and warns before stock runs low or expires. Managers get a dashboard and reports to plan purchases and reduce losses.</p>
         <ul class="features">
-          <li>Stock in and stock out records</li>
-          <li>Low-stock and expiry date alerts</li>
-          <li>Suppliers, sales and batch tracking</li>
-          <li>Dashboard and reports for managers</li>
+          <li data-i18n="p3.f1">Stock in and stock out records</li>
+          <li data-i18n="p3.f2">Low-stock and expiry date alerts</li>
+          <li data-i18n="p3.f3">Suppliers, sales and batch tracking</li>
+          <li data-i18n="p3.f4">Dashboard and reports for managers</li>
         </ul>
       </div>
       <div class="tags"><span class="tag">Python</span><span class="tag">PostgreSQL</span><span class="tag">React</span><span class="tag">Vite</span><span class="tag">TypeScript</span></div>
@@ -154,19 +179,19 @@
     <article class="project">
       <div class="thumb"><div class="ill" data-ill="construction"></div></div>
       <div>
-        <p class="kind">Web app, construction</p>
-        <h3>CSMS, Construction Services Management System</h3>
-        <p>Built for GTC (Global des Travaux de Construction) to streamline construction project management, resource allocation and client communication.</p>
+        <p class="kind" data-i18n="p4.kind">Web app, construction</p>
+        <h3 data-i18n="p4.title">CSMS, Construction Services Management System</h3>
+        <p data-i18n="p4.desc">Built for GTC (Global des Travaux de Construction) to streamline construction project management, resource allocation and client communication.</p>
       </div>
-      <div class="tags"><span class="tag">Project management</span><span class="tag">Database</span><span class="tag">Web application</span></div>
+      <div class="tags"><span class="tag" data-i18n="tag.projectManagement">Project management</span><span class="tag" data-i18n="tag.database">Database</span><span class="tag" data-i18n="tag.webApplication">Web application</span></div>
     </article>
 
     <article class="project">
       <div class="thumb"><div class="ill" data-ill="fullstack"></div></div>
       <div>
-        <p class="kind">Web app</p>
-        <h3>Full-stack web application</h3>
-        <p>A complete web application with a React.js frontend, a Java backend and a PostgreSQL database.</p>
+        <p class="kind" data-i18n="p5.kind">Web app</p>
+        <h3 data-i18n="p5.title">Full-stack web application</h3>
+        <p data-i18n="p5.desc">A complete web application with a React.js frontend, a Java backend and a PostgreSQL database.</p>
       </div>
       <div class="tags"><span class="tag">React.js</span><span class="tag">TypeScript</span><span class="tag">Java</span><span class="tag">PostgreSQL</span></div>
     </article>
@@ -174,21 +199,21 @@
     <article class="project">
       <div class="thumb"><div class="ill" data-ill="network"></div></div>
       <div>
-        <p class="kind">System tool</p>
-        <h3>Network management system</h3>
-        <p>Monitors and manages network infrastructure with automated alerting and reporting.</p>
+        <p class="kind" data-i18n="p6.kind">System tool</p>
+        <h3 data-i18n="p6.title">Network management system</h3>
+        <p data-i18n="p6.desc">Monitors and manages network infrastructure with automated alerting and reporting.</p>
       </div>
-      <div class="tags"><span class="tag">Python</span><span class="tag">Linux</span><span class="tag">Network</span><span class="tag">Automation</span></div>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Linux</span><span class="tag" data-i18n="tag.network">Network</span><span class="tag" data-i18n="tag.automation">Automation</span></div>
     </article>
 
     <article class="project">
       <div class="thumb"><div class="ill" data-ill="database"></div></div>
       <div>
-        <p class="kind">Developer tool</p>
-        <h3>Database management tool</h3>
-        <p>Manage PostgreSQL databases through a friendly interface with advanced query capabilities.</p>
+        <p class="kind" data-i18n="p7.kind">Developer tool</p>
+        <h3 data-i18n="p7.title">Database management tool</h3>
+        <p data-i18n="p7.desc">Manage PostgreSQL databases through a friendly interface with advanced query capabilities.</p>
       </div>
-      <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Web API</span><span class="tag">JavaScript</span><span class="tag">SQL</span></div>
+      <div class="tags"><span class="tag">PostgreSQL</span><span class="tag" data-i18n="tag.webApi">Web API</span><span class="tag">JavaScript</span><span class="tag">SQL</span></div>
     </article>
   </div>
 </section>
@@ -196,18 +221,18 @@
 <!-- ============ SKILLS ============ -->
 <section class="block alt" id="skills">
   <div class="wrap">
-    <div class="head"><div><h2>Skills</h2><p>Languages, frameworks and platforms I work with</p></div><div class="ill" data-ill="skills"></div></div>
+    <div class="head"><div><h2 data-i18n="skills.title">Skills</h2><p data-i18n="skills.sub">Languages, frameworks and platforms I work with</p></div><div class="ill" data-ill="skills"></div></div>
     <div class="skills-grid">
-      <div class="skill"><h3><i class="fab fa-react"></i>Frontend</h3>
+      <div class="skill"><h3><i class="fab fa-react" aria-hidden="true"></i><span data-i18n="skills.frontend">Frontend</span></h3>
         <ul><li>React.js</li><li>TypeScript</li><li>JavaScript</li><li>Vite</li><li>HTML5 &amp; CSS3</li></ul></div>
-      <div class="skill"><h3><i class="fas fa-code"></i>Backend</h3>
-        <ul><li>Java</li><li>Python</li><li>Web API development</li><li>RESTful services</li></ul></div>
-      <div class="skill"><h3><i class="fas fa-database"></i>Database</h3>
-        <ul><li>PostgreSQL</li><li>SQL</li><li>Database design</li></ul></div>
-      <div class="skill"><h3><i class="fas fa-cloud"></i>Cloud &amp; deployment</h3>
-        <ul><li>Neon <small>serverless PostgreSQL</small></li><li>Render <small>app hosting</small></li><li>Cloudflare <small>DNS, CDN &amp; security</small></li></ul></div>
-      <div class="skill"><h3><i class="fas fa-network-wired"></i>Network &amp; tools</h3>
-        <ul><li>Advanced Linux</li><li>Network operations</li><li>Advanced networking (Cisco)</li><li>Postman API testing</li></ul></div>
+      <div class="skill"><h3><i class="fas fa-code" aria-hidden="true"></i><span data-i18n="skills.backend">Backend</span></h3>
+        <ul><li>Java</li><li>Python</li><li data-i18n="skills.webApi">Web API development</li><li data-i18n="skills.rest">RESTful services</li></ul></div>
+      <div class="skill"><h3><i class="fas fa-database" aria-hidden="true"></i><span data-i18n="skills.database">Database</span></h3>
+        <ul><li>PostgreSQL</li><li>SQL</li><li data-i18n="skills.dbDesign">Database design</li></ul></div>
+      <div class="skill"><h3><i class="fas fa-cloud" aria-hidden="true"></i><span data-i18n="skills.cloud">Cloud &amp; deployment</span></h3>
+        <ul><li>Neon <small data-i18n="skills.neonNote">serverless PostgreSQL</small></li><li>Render <small data-i18n="skills.renderNote">app hosting</small></li><li>Cloudflare <small data-i18n="skills.cloudflareNote">DNS, CDN &amp; security</small></li></ul></div>
+      <div class="skill"><h3><i class="fas fa-network-wired" aria-hidden="true"></i><span data-i18n="skills.network">Network &amp; tools</span></h3>
+        <ul><li data-i18n="skills.linux">Advanced Linux</li><li data-i18n="skills.netops">Network operations</li><li data-i18n="skills.netadv">Advanced networking (Cisco)</li><li data-i18n="skills.postman">Postman API testing</li></ul></div>
     </div>
   </div>
 </section>
@@ -215,41 +240,41 @@
 <!-- ============ EDUCATION ============ -->
 <section class="block" id="education">
   <div class="wrap">
-    <div class="head"><div><h2>Education</h2><p>Degree and certifications</p></div><div class="ill" data-ill="education"></div></div>
+    <div class="head"><div><h2 data-i18n="education.title">Education</h2><p data-i18n="education.sub">Degree and certifications</p></div><div class="ill" data-ill="education"></div></div>
     <div class="t-item"><div class="t-date">2021 – 2025</div><div>
-      <h3>BSc in Software Engineering</h3><h4>Adventist University of Central Africa (AUCA), Kigali</h4>
-      <p>Focused on software development, system architecture and network integration.</p></div></div>
-    <div class="t-item"><div class="t-date">Completed</div><div>
-      <h3>Certificate in Network Operations</h3><h4>Cisco</h4>
-      <p>Network infrastructure, protocols and operational best practices.</p></div></div>
-    <div class="t-item"><div class="t-date">Completed</div><div>
-      <h3>Certificate in Advanced Networking</h3><h4>Cisco</h4>
-      <p>Advanced network design, implementation and troubleshooting.</p></div></div>
+      <h3 data-i18n="edu.h3">BSc in Software Engineering</h3><h4 data-i18n="edu.h4">Adventist University of Central Africa (AUCA), Kigali</h4>
+      <p data-i18n="edu.p">Focused on software development, system architecture and network integration.</p></div></div>
+    <div class="t-item"><div class="t-date" data-i18n="edu.done">Completed</div><div>
+      <h3 data-i18n="edu.cert1">Certificate in Network Operations</h3><h4>Cisco</h4>
+      <p data-i18n="edu.cert1p">Network infrastructure, protocols and operational best practices.</p></div></div>
+    <div class="t-item"><div class="t-date" data-i18n="edu.done">Completed</div><div>
+      <h3 data-i18n="edu.cert2">Certificate in Advanced Networking</h3><h4>Cisco</h4>
+      <p data-i18n="edu.cert2p">Advanced network design, implementation and troubleshooting.</p></div></div>
   </div>
 </section>
 
 <!-- ============ CONTACT ============ -->
 <section class="block alt" id="contact">
   <div class="wrap">
-    <div class="head"><div><h2>Contact</h2><p>Open to jobs and freelance projects</p></div><div class="ill" data-ill="contact"></div></div>
-    <p class="contact-big"><a href="mailto:michelamani151@gmail.com">Let's build something together</a></p>
+    <div class="head"><div><h2 data-i18n="contact.title">Contact</h2><p data-i18n="contact.sub">Open to jobs and freelance projects</p></div><div class="ill" data-ill="contact"></div></div>
+    <p class="contact-big"><a href="mailto:michelamani151@gmail.com" data-i18n="contact.big">Let's build something together</a></p>
     <div class="contact-grid">
-      <a class="c-card" href="mailto:michelamani151@gmail.com"><i class="fas fa-envelope"></i><div><small>Email</small><b>michelamani151@gmail.com</b></div></a>
-      <a class="c-card" href="https://linkedin.com/in/michel-cindege-a37742275" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i><div><small>LinkedIn</small><b>michel-cindege-a37742275</b></div></a>
-      <a class="c-card" href="https://github.com/michelamani05" target="_blank" rel="noopener"><i class="fab fa-github"></i><div><small>GitHub</small><b>michelamani05</b></div></a>
-      <a class="c-card" href="tel:+243996748364"><i class="fas fa-phone"></i><div><small>Phone (Airtel DRC)</small><b>+243 996 748 364</b></div></a>
-      <a class="c-card" href="tel:+250791447517"><i class="fas fa-phone"></i><div><small>Phone (MTN Rwanda)</small><b>+250 791 447 517</b></div></a>
+      <a class="c-card" href="mailto:michelamani151@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i><div><small data-i18n="contact.email">Email</small><b>michelamani151@gmail.com</b></div></a>
+      <a class="c-card" href="https://linkedin.com/in/michel-cindege-a37742275" target="_blank" rel="noopener"><i class="fab fa-linkedin-in" aria-hidden="true"></i><div><small data-i18n="contact.linkedin">LinkedIn</small><b>michel-cindege-a37742275</b></div></a>
+      <a class="c-card" href="https://github.com/michelamani05" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i><div><small data-i18n="contact.github">GitHub</small><b>michelamani05</b></div></a>
+      <a class="c-card" href="tel:+243996748364"><i class="fas fa-phone" aria-hidden="true"></i><div><small data-i18n="contact.phone1">Phone (Airtel DRC)</small><b>+243 996 748 364</b></div></a>
+      <a class="c-card" href="tel:+250791447517"><i class="fas fa-phone" aria-hidden="true"></i><div><small data-i18n="contact.phone2">Phone (MTN Rwanda)</small><b>+250 791 447 517</b></div></a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <span>&copy; <span id="year">2026</span> AMANI CINDEGE Michel. All rights reserved.</span>
+    <span>&copy; <span id="year">2026</span> AMANI CINDEGE Michel. <span data-i18n="footer.rights">All rights reserved.</span></span>
     <div class="social">
-      <a href="https://linkedin.com/in/michel-cindege-a37742275" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="https://github.com/michelamani05" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-      <a href="mailto:michelamani151@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://linkedin.com/in/michel-cindege-a37742275" target="_blank" rel="noopener" data-i18n-attr="aria-label:footer.linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+      <a href="https://github.com/michelamani05" target="_blank" rel="noopener" data-i18n-attr="aria-label:footer.github" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+      <a href="mailto:michelamani151@gmail.com" data-i18n-attr="aria-label:footer.email" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a>
     </div>
   </div>
 </footer>
@@ -261,6 +286,7 @@
 </div>
 <div class="sr-only" id="announce" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></div>
 
+<script src="i18n.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
