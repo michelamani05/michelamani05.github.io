@@ -143,3 +143,35 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     goTo(id);
   });
 });
+
+/* ---------- Light / dark mode ---------- */
+const themeBtn = document.getElementById('themeBtn');
+const darkMq = window.matchMedia('(prefers-color-scheme: dark)');
+let theme = document.documentElement.getAttribute('data-theme')
+        || (darkMq.matches ? 'dark' : 'light');
+
+function paintTheme(){
+  document.documentElement.setAttribute('data-theme', theme);
+  const toDark = theme !== 'dark';
+  themeBtn.innerHTML = toDark
+    ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  themeBtn.setAttribute('aria-label',
+    toDark ? 'Switch to dark mode' : 'Switch to light mode');
+  themeBtn.setAttribute('title', toDark ? 'Switch to dark mode' : 'Switch to light mode');
+  themeBtn.setAttribute('aria-pressed', String(!toDark));
+}
+
+themeBtn.addEventListener('click', ()=>{
+  theme = theme === 'dark' ? 'light' : 'dark';
+  try{ localStorage.setItem('theme', theme); }catch(e){}
+  paintTheme();
+});
+
+/* Follow the OS setting until the visitor chooses a theme themselves. */
+darkMq.addEventListener('change', e=>{
+  let saved = null;
+  try{ saved = localStorage.getItem('theme'); }catch(err){}
+  if(!saved){ theme = e.matches ? 'dark' : 'light'; paintTheme(); }
+});
+
+paintTheme();

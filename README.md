@@ -23,6 +23,14 @@ images, and full-screen wipe transitions between sections.
 
 ## Design features
 
+- **Light / dark mode** — the moon button in the nav switches theme. Colours are
+  driven entirely by CSS custom properties on `:root`, with a
+  `[data-theme="dark"]` block that re-points them, so both themes share one
+  set of rules. A small script in `<head>` applies the stored theme before the
+  first paint, so there is no flash of the wrong mode. New visitors get their
+  operating system setting via `prefers-color-scheme`; the choice is saved to
+  `localStorage` under `theme` and takes precedence over the OS from then on.
+  `color-scheme` is set too, so form controls and scrollbars match.
 - **3-second menu transition** — clicking any menu item (or an in-page link)
   plays a full-screen overlay: two clip-path layers wipe in, a line
   illustration draws itself, the section title fades in, and a progress bar
