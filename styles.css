@@ -292,3 +292,8 @@ footer .social a:hover{background:var(--foot-hover-bg);color:var(--foot-hover-fg
   *,*::before,*::after{animation:none!important;transition:none!important}
   .ill.pending svg *{stroke-dashoffset:0}
 }
+
+/* ===== One section per menu ===== */
+[hidden]{display:none !important}
+section.block{min-height:100svh;padding-top:clamp(110px,14vh,150px)}
+

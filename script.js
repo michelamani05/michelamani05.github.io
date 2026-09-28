@@ -36,6 +36,7 @@ window.addEventListener('load', ()=>requestAnimationFrame(()=>document.body.clas
 /* ---------- Name always fits the screen width ---------- */
 const nameEl = document.getElementById('name');
 function fitName(){
+  if (nameEl.offsetParent === null) return;
   const stacked = window.matchMedia('(max-width:760px)').matches;
   nameEl.style.fontSize = '100px';
   const [w1,w2] = nameEl.querySelectorAll('span');
@@ -80,18 +81,26 @@ function setMenu(open){
 }
 burger.addEventListener('click', ()=>setMenu(!links.classList.contains('open')));
 
-/* Highlight the current section in the menu */
-const navMap = {};
-links.querySelectorAll('a').forEach(a=>navMap[a.getAttribute('href').slice(1)] = a);
-const secObs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      Object.values(navMap).forEach(a=>a.classList.remove('current'));
-      if(navMap[e.target.id]) navMap[e.target.id].classList.add('current');
-    }
-  });
-},{rootMargin:'-45% 0px -50% 0px'});
-document.querySelectorAll('header[id], section[id]').forEach(s=>secObs.observe(s));
+/* ---------- One section visible at a time ---------- */
+const views = [...document.querySelectorAll('header.hero[id], section.block[id]')];
+const viewIds = views.map(v => v.id);
+
+function showView(id, push){
+  if (!viewIds.includes(id)) id = 'home';
+  views.forEach(v => { v.hidden = v.id !== id; });
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  links.querySelectorAll('a').forEach(a =>
+    a.classList.toggle('current', a.getAttribute('href') === '#' + id));
+  if (push) history.pushState(null, '', '#' + id);
+  const view = document.getElementById(id);
+  view.setAttribute('tabindex', '-1');
+  view.focus({ preventScroll: true });
+  if (id === 'home') fitName();
+}
+function currentView(){ return (views.find(v => !v.hidden) || views[0]).id; }
+
+showView(location.hash.slice(1) || 'home', false);
+window.addEventListener('popstate', () => showView(location.hash.slice(1) || 'home', false));
 
 /* ---------- 3-second section transition ---------- */
 const DURATION = 3000;
@@ -108,17 +117,12 @@ const slot = document.getElementById('ptSlot');
 const announce = document.getElementById('announce');
 let busy = false;
 
-function jumpTo(target){
-  const y = target.id === 'home' ? 0 : target.getBoundingClientRect().top + window.scrollY;
-  window.scrollTo({top:y, behavior:'instant'});
-  history.replaceState(null, '', '#' + target.id);
-  target.setAttribute('tabindex','-1');
-  target.focus({preventScroll:true});
-}
+function jumpTo(target){ showView(target.id, true); }
 
 function goTo(id){
   const target = document.getElementById(id);
   if(!target || busy) return;
+  if (target.id === currentView()) { setMenu(false); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
   setMenu(false);
   if(reduce){ jumpTo(target); return; }
   busy = true;
